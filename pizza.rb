@@ -1,42 +1,39 @@
 class Pizza
+	attr_accessor :slices
 
-    def initialize(name, slices)
-        @name = name
-        @slices = slices
-        @is_ready = false
-    end
+	def initialize(name, slices)
+		@name = name
+		@slices = slices
+		@cooked = false
+	end
 
-    def bake
-        @is_ready = true
-    end
+	def talk()
+		puts("Hello, I am a #{@name} pizza with #{@slices} slices")
+	end
 
-    def talk
-        # Describe the name of the pizza and slices
-        puts("I am a #{@name} pizza and I have #{@slices} slices")
+	def cook()
+		@cooked = true
+	end
 
-        # Announce if it's ready or not.
-        if @is_ready == true
-            puts "The pizza is ready to eat!"
-        else
-            puts "You might want to bake this thing first."
-        end
-    end
+	def eat_slice()
+		if @slices == 0
+			puts "There's no more pizza left! Order another."
+		else
+			@slices = @slices - 1
+		end
 
-    def eat_slice()
-        if @slices == 0
-            puts "There's no more pizza!"
-        else
-            @slices = @slices - 1
-            talk
-        end
-    end
+		if @slices == 1
+			puts "There's only one left!"
+		end
 
-    def combine_slices(otherPizza)
-        combined_slices = @slices + otherPizza.slices
-        puts "When our pizzas combine, we have #{combined_slices} slices!"
-    end
+		talk()
+		if @cooked == false
+			puts "YOU JUST ATE A FROZEN PIZZA SLICE!!!!"
+		end
+	end
 
-    def set_name(the_new_name)
-        @name = the_new_name
-    end
+	def combine_with( other_pizza )
+		@slices = @slices + other_pizza.slices
+		other_pizza.slices = 0
+	end
 end
